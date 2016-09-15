@@ -24,16 +24,20 @@ export default class Task extends Component {
 
   render() {
     // checked class
-    const taskClassName = this.props.task.checked ? 'checked' : '';
+    const taskClassName = this.props.task.checked ? 'checked': '';
 
     // use || false syntax for checked value so initial empty value doesn't throw warning
     return (
-      <li>
+      <li className={taskClassName} >
         <button className='delete' onClick={this.deleteThisTask.bind(this)}>&times;</button>
 
         <input type='checkbox' readOnly checked={this.props.task.checked || false} onClick={this.toggleChecked.bind(this)} />
 
-        <span className='text'>{this.props.task.text}</span>
+        <span className='text'>
+          { this.props.task.username ?
+            <strong>{this.props.task.username} &middot;</strong>
+          : <em>anon &middot;</em> } {this.props.task.text}
+        </span>
       </li>
     );
   }
